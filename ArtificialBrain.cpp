@@ -1,4 +1,5 @@
 #include "ArtificialBrain.hpp"
+#include "GeneralNeuron.hpp"
 
 void md::Brain::IncrementNID() { nrn::NeuronID += 1; }
 
@@ -24,8 +25,25 @@ void md::Brain::InitialzeTNeuron(int n) {
   }
 }
 
+void md::Brain::FormConnectionsBetweenNeurons() {
+  // between base neurons and layered neurons
+  for (size_t i = 0; i < BaseNeurons.size(); ++i) {
+    for (size_t j = 0; j < LayeredNeurons.size(); ++j) {
+      BaseNeurons.at(i).Connections.emplace_back(LayeredNeurons.at(j).NID,
+                                                 0.5f);
+    }
+  }
+  // between layered neurons and top neurons
+  for (size_t i = 0; i < LayeredNeurons.size(); ++i) {
+    for (size_t j = 0; j < LayeredNeurons.size(); ++j) {
+      LayeredNeurons.at(i).Connections.emplace_back(TopNeurons.at(j).NID, 0.5f);
+    }
+  }
+}
+
 void md::Brain::SetupNeurons(int B_n, int T_n, int G_n) {
   InitialzeBNeuron(B_n);
   InitialzeTNeuron(T_n);
   InitialzeGNeuron(G_n);
+  FormConnectionsBetweenNeurons();
 }

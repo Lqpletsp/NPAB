@@ -8,6 +8,7 @@ private:
   void InitialzeBNeuron(int n);
   void InitialzeGNeuron(int n);
   void InitialzeTNeuron(int n);
+  void FormConnectionsBetweenNeurons();
 
 public:
   std::vector<nrn::BNeuron> BaseNeurons;
