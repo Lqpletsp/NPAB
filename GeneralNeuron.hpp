@@ -14,19 +14,19 @@ public:
   bool Active = true;
 
   GNeuron(int &NID) { this->NID = NID; }
-  void GetSignal(float &SignalReceived);
-  void ChangeActiveStatus(bool &Status);
+  void GetSignal(float SignalReceived);
+  void ChangeActiveStatus(bool Status);
   float SendSignal();
 };
 
 class BNeuron : public GNeuron { // B -> Base
 public:
-  BNeuron(int &NID) : GNeuron(NID) { Threshold = 0.1; }
+  BNeuron(int NID) : GNeuron(NID) { Threshold = 0.1; }
 };
 
 class TNeuron : public GNeuron { // T -> Top
 public:
-  TNeuron(int &NID) : GNeuron(NID) { Threshold = 1.0; }
+  TNeuron(int NID) : GNeuron(NID) { Threshold = 1.0; }
 };
 inline int NeuronID = 0;
 

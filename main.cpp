@@ -18,6 +18,7 @@ int main() {
   // generate 5 input signals
   std::vector<double> InputSignals = GenerateInputSignals(5);
   md::Brain Brain_main;
-  Brain_main.SetupNeurons(nBaseNeurons, nBaseNeurons, nLayeredNeurons);
+  Brain_main.SetupNeurons(nBaseNeurons, nTopNeurons, nLayeredNeurons);
+  Brain_main.StimuliPath(InputSignals);
   return 0;
 }
