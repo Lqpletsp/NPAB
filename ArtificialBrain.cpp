@@ -41,7 +41,7 @@ void md::Brain::FormConnectionsBetweenBaseAndLayered() {
 }
 void md::Brain::FormConnectionsBetweenLayeredAndTop() {
   for (size_t i = 0; i < LayeredNeurons.size(); ++i) {
-    for (size_t j = 0; j < LayeredNeurons.size(); ++j) {
+    for (size_t j = 0; j < TopNeurons.size(); ++j) {
       LayeredNeurons.at(i).Connections.emplace_back(TopNeurons.at(j).NID, 0.5f);
     }
   }
