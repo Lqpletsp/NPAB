@@ -1,4 +1,5 @@
 #include "ArtificialBrain.hpp"
+#include <iostream>
 #include <random>
 #include <vector>
 
@@ -19,6 +20,10 @@ int main() {
   std::vector<double> InputSignals = GenerateInputSignals(5);
   md::Brain Brain_main;
   Brain_main.SetupNeurons(nBaseNeurons, nTopNeurons, nLayeredNeurons);
-  Brain_main.StimuliPath(InputSignals);
+  for (float signal : InputSignals) {
+    Brain_main.StimuliPath(signal);
+    std::cout << "Top neuron response: " << Brain_main.GetTopNeuronOutput()
+              << std::endl;
+  }
   return 0;
 }

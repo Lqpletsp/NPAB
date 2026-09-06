@@ -1,15 +1,15 @@
 #include "GeneralNeuron.hpp"
 #include <random>
 
-void nrn::GNeuron::GetSignal(float &SignalReceived) {
+void nrn::GNeuron::GetSignal(float SignalReceived) {
   CurrentSignal += SignalReceived;
 }
 
-void nrn::GNeuron::ChangeActiveStatus(bool &Status) { Active = Status; }
+void nrn::GNeuron::ChangeActiveStatus(bool Status) { Active = Status; }
 
 float nrn::GNeuron::SendSignal() {
-  if (CurrentSignal >= Threshold) {
-    int SignalToSend = (CurrentSignal - Threshold) / Threshold;
+  if (CurrentSignal > Threshold) {
+    float SignalToSend = (CurrentSignal - Threshold) / Threshold;
     CurrentSignal -= SignalToSend;
     return CurrentSignal;
   }
@@ -21,4 +21,9 @@ void nrn::GNeuron::SetNeuronThreshold() {
   std::mt19937 gen(rd());
   std::uniform_int_distribution<int> distrib(0.0, 1);
   Threshold = distrib(gen);
+}
+
+float nrn::GNeuron::GetAndReact(float signal) {
+  GetSignal(signal);
+  return SendSignal();
 }
