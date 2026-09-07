@@ -4,7 +4,6 @@
 namespace nrn {
 class GNeuron { // G -> General
 private:
-  void SetNeuronThreshold();
   float SendSignal();
   void GetSignal(float SignalReceived);
 
@@ -18,6 +17,7 @@ public:
   GNeuron(int &NID) { this->NID = NID; }
   void ChangeActiveStatus(bool Status);
   float GetAndReact(float stimulus);
+  void SetNeuronThreshold();
 };
 
 class BNeuron : public GNeuron { // B -> Base

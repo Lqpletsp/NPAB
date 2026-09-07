@@ -10,7 +10,11 @@ void nrn::GNeuron::ChangeActiveStatus(bool Status) { Active = Status; }
 float nrn::GNeuron::SendSignal() {
   if (CurrentSignal > Threshold) {
     float SignalToSend = (CurrentSignal - Threshold) / Threshold;
-    CurrentSignal -= SignalToSend;
+    if (SignalToSend > CurrentSignal) {
+      SignalToSend = CurrentSignal;
+      CurrentSignal = 0;
+    } else
+      CurrentSignal -= SignalToSend;
     return CurrentSignal;
   }
   return 0.0;
