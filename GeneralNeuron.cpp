@@ -15,7 +15,7 @@ float nrn::GNeuron::SendSignal() {
       CurrentSignal = 0;
     } else
       CurrentSignal -= SignalToSend;
-    return CurrentSignal;
+    return SignalToSend;
   }
   return 0.0;
 }
@@ -23,7 +23,7 @@ float nrn::GNeuron::SendSignal() {
 void nrn::GNeuron::SetNeuronThreshold() {
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<int> distrib(0.0, 1);
+  std::uniform_int_distribution<int> distrib(0.0f, 1.0f);
   Threshold = distrib(gen);
 }
 

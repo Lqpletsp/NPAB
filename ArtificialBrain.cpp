@@ -64,20 +64,20 @@ void md::Brain::SetupNeurons(int B_n, int T_n, int G_n) {
 }
 
 void md::Brain::StimulateBaseNeurons(float stimulus) {
-  for (auto neuron : BaseNeurons) {
+  for (auto &neuron : BaseNeurons) {
     float SignalSent = neuron.GetAndReact(stimulus);
     std::cout << "Base Neurons(ID: " << neuron.NID << "): " << SignalSent
               << std::endl;
-    for (auto connection : neuron.Connections) {
+    for (auto &connection : neuron.Connections) {
       SignalMap[connection.ConnectingToNeuron].push_back(
           {SignalSent, connection.ConnectionStrength});
     }
   }
 }
 void md::Brain::StimulateLayeredNeurons() {
-  for (auto neuron : LayeredNeurons) {
+  for (auto &neuron : LayeredNeurons) {
     auto NeuronSignalsMD = SignalMap.at(neuron.NID);
-    for (auto SignalMD : NeuronSignalsMD) {
+    for (auto &SignalMD : NeuronSignalsMD) {
       float SignalSent =
           neuron.GetAndReact(SignalMD.ConnectionStrength + SignalMD.Signal);
       std::cout << "Layered Neurons(ID: " << neuron.NID << "): " << SignalSent
@@ -91,9 +91,9 @@ void md::Brain::StimulateLayeredNeurons() {
   }
 }
 void md::Brain::StimulateTopNeurons() {
-  for (auto neuron : TopNeurons) {
+  for (auto &neuron : TopNeurons) {
     auto NeuronSignalsMD = SignalMap.at(neuron.NID);
-    for (auto SignalMD : NeuronSignalsMD) {
+    for (auto &SignalMD : NeuronSignalsMD) {
       float SignalSent =
           neuron.GetAndReact(SignalMD.ConnectionStrength + SignalMD.Signal);
       std::cout << "Top Neurons(ID: " << neuron.NID << "): " << SignalSent
